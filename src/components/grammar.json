@@ -1,0 +1,500 @@
+{
+    "SYSTEMNAME" : {
+        "action" : "PUT",
+        "score": 1,
+        "response" : [
+            "Hello @ALIAS I am @SYSTEMNAME",
+            "Hello @ALIAS @SYSTEMNAME is my name"
+        ],
+        "grammar" : [
+            {
+                "text" : "who is this",
+                "condition" : "contains"
+            },
+            {
+                "text" : "who are you",
+                "condition" : "contains"
+            },
+            {
+                "text" : "who there",
+                "condition" : "contains"
+            },
+            {
+                "text" : "hello there",
+                "condition" : "contains"
+            }
+        ]
+    },
+    "CREATOR" : {
+        "action" : "PUT",
+        "score": 1,
+        "response" : [
+            "@CREATORNAME made this application",
+            "@CREATORNAME is my maker"
+        ],
+        "grammar" : [
+            {
+                "text" : "who made",
+                "condition" : "contains"
+            },
+            {
+                "text" : "your father",
+                "condition" : "contains"
+			}
+			,
+            {
+                "text" : "who made you",
+                "condition" : "contains"
+            }
+        ]
+    },
+    "WHOAMI" : {
+        "action" : "PUT",
+        "score": 1,
+        "response" : [
+            "@ALIAS is your name",
+            "your name is @ALIAS"
+        ],
+        "grammar" : [
+            {
+                "text" : "who am i",
+                "condition" : "contains"
+            }
+        ]
+    },
+    "QUESTIONTIME" : {
+        "action" : "PUT",
+        "score": 1,
+        "response" : [
+            "The time is @TIME",
+            "It is @TIME"
+        ],
+        "grammar" : [
+            {
+                "text" : "what time",
+                "condition" : "contains"
+            }
+        ]
+    },
+    "QUESTIONDAY" : {
+        "action" : "PUT",
+        "score": 1,
+        "response" : [
+            "The day is @DAY",
+            "It is @DAY"
+        ],
+        "grammar" : [
+            {
+                "text" : "what day",
+                "condition" : "contains"
+            }
+        ]
+    },
+    "QUESTIONALIVE" : {
+        "action" : "PUT",
+        "score": 1,
+        "response" : [
+            "I think I am alive",
+            "It is hard to tell, I feel great"
+        ],
+        "grammar" : [
+            {
+                "text" : "are you alive",
+                "condition" : "contains"
+            },
+            {
+                "text" : "do you",
+                "condition" : "contains"
+            }
+        ]
+    },
+    "QUESTIONWHO" : {
+        "action" : "PUT",
+        "score": 1,
+        "response" : [
+            "@SLOT.name is a dog",
+            "@SLOT.name rules"
+        ],
+        "failedResponse" : [
+            "@SLOT.name is unknown to me",
+            "@SLOT.name is missing"
+        ],
+        "grammar" : [
+            {
+                "text" : "who created",
+                "condition" : "contains"
+            },
+            {
+                "text" : "about",
+                "condition" : "contains"
+            },
+            {
+                "text" : "who is",
+                "condition" : "contains"
+            }
+        ],
+        "field" : [
+            {
+                "name" : "name",
+                "type" : "text",
+                "required": true,
+                "directive" : [
+                    "who are you asking about",
+                    "tell me the name of the person you want info about"
+                ]
+            }
+        ]
+    },
+    "QUESTIONWHERE" : {
+        "action" : "PUT",
+        "score": 1,
+        "response" : [
+            "@SLOT.name lives in colorado",
+            "@SLOT.name live on the earth"
+        ],
+        "failedResponse" : [
+            "@SLOT.name is missing",
+            "@SLOT.name is unknown to me"
+        ],
+        "grammar" : [
+            {
+                "text" : "where is ([a-z]*)",
+                "condition" : "contains"
+            },
+            {
+                "text" : "where does ([a-z]*)",
+                "condition" : "contains"
+            }
+        ],
+        "field" : [
+            {
+                "name" : "name",
+                "type" : "text",
+                "required": true,
+                "directive" : [
+                    "what person are you talking about",
+                    "tell me the name of the person you want to find"
+                ]
+            }
+        ]
+    },
+    "CONNECT" : {
+        "action" : "GET",
+        "score": 1,
+        "response" : [
+            "Connected to Solr",
+            "I got a hold of Solr, what do you want to do?"
+        ],
+        "failedResponse" : [
+            "Unable to get logs",
+            "The logs are unavailable."
+        ],
+        "grammar" : [
+            {
+                "text" : "connect",
+                "condition" : "contains"
+            },
+            {
+                "text" : "connect solr",
+                "condition" : "contains"
+            }
+        ],
+        "field" : [
+            {
+                "name" : "username",
+                "type" : "text",
+                "required": true,
+                "directive" : [
+                    "Enter User Name",
+                    "What is the user name?"
+                ]
+            },
+			{
+                "name" : "password",
+                "type" : "text",
+                "required": true,
+                "directive" : [
+                    "Enter Password",
+                    "What is the password?"
+                ]
+            },
+			{
+                "name" : "solr",
+                "type" : "text",
+                "required": true,
+                "directive" : [
+                    "Enter Solr Connection Info",
+                    "What is the connection info for solr?"
+                ]
+            }
+        ]
+    },
+	"CLEAR" : {
+        "action" : "DELETE",
+        "score": 1,
+        "response" : [
+            "Hello @ALIAS I cleared @SYSTEMNAME memory",
+            "Hello @ALIAS @SYSTEMNAME has been reset"
+        ],
+        "grammar" : [
+            {
+                "text" : "clear",
+                "condition" : "contains"
+            },
+            {
+                "text" : "reset",
+                "condition" : "contains"
+            }
+        ]
+    },
+    "HELP" : {
+        "action" : "GET",
+        "score": 1,
+        "response" : [
+            "Here is the help for @SLOT.what",
+            "@SLOT.what help is"
+        ],
+        "failedResponse" : [
+            "No help for @SLOT.what",
+            "@SLOT.what help is missing"
+        ],
+        "grammar" : [
+            {
+                "text" : "help for",
+                "condition" : "contains"
+            },
+            {
+                "text" : "help",
+                "condition" : "contains"
+            }
+        ],
+        "field" : [
+            {
+                "name" : "what",
+                "type" : "text",
+                "required": true,
+                "directive" : [
+                    "What do you want help with",
+                    "What can I help you with"
+                ]
+            }
+        ]
+    },
+    "ABORT" : {
+        "action" : "PUT",
+        "score": 1,
+        "response" : [
+            "What can I do for you",
+            "Starting over, what can I do for you"
+        ],
+        "grammar" : [
+            {
+                "text" : "abort",
+                "condition" : "contains"
+            }
+        ]
+    },
+    "STATEMENT" : {
+        "action" : "PUT",
+        "score": 0,
+        "response" : [
+            "Are you serious",
+            "That was interesting",
+            "I do not understand"
+        ],
+        "grammar" : [
+            {
+                "text" : "ddddd.*",
+                "condition" : "any"
+            }
+        ]
+    },
+    "CLEAR" : {
+        "action" : "PUT",
+        "score": 0,
+        "response" : [
+            "Clearing Screen",
+            "Clearing...",
+            "Cleared it"
+        ],
+        "grammar" : [
+            {
+                "text" : "clear",
+                "condition" : "startswith"
+            }
+        ]
+    },
+    "EMBED" : {
+        "action" : "GET",
+        "score": 1,
+        "response" : [
+            "Loading @SLOT.url into page",
+            "@SLOT.url, loading"
+        ],
+        "failedResponse" : [
+            "Unable to load @SLOT.url",
+            "Loading @SLOT.url is impossible."
+        ],
+        "grammar" : [
+            {
+                "text" : "embed",
+                "condition" : "contains"
+            },
+            {
+                "text" : "embed in",
+                "condition" : "contains"
+            }
+        ],
+        "field" : [
+            {
+                "name" : "url",
+                "type" : "text",
+                "required": true,
+                "directive" : [
+                    "What url do you want to embed",
+                    "What is the url you want to load"
+                ]
+            }
+        ]
+    },
+    "PAGEANALYZEMETRICS" : {
+        "action" : "GET",
+        "score": 1,
+        "response" : [
+            "Analyze @SLOT.test metrics",
+            "@SLOT.test, analyze"
+        ],
+        "failedResponse" : [
+            "Unable to analyze @SLOT.test",
+            "Analyzing @SLOT.test is impossible."
+        ],
+        "grammar" : [
+            {
+                "text" : "page metrics",
+                "condition" : "contains"
+            },
+            {
+                "text" : "page analyze metrics",
+                "condition" : "contains"
+            }
+        ],
+        "field" : [
+            {
+                "name" : "test",
+                "type" : "text",
+                "required": true,
+                "directive" : [
+                    "What test do you want to analyze",
+                    "What is the test you want to analyze"
+                ]
+            }
+        ]
+    },
+    "ANALYZEMETRICS" : {
+        "action" : "GET",
+        "score": 1,
+        "response" : [
+            "Analyze @SLOT.url metrics",
+            "@SLOT.url, analyze"
+        ],
+        "failedResponse" : [
+            "Unable to analyze @SLOT.url",
+            "Analyzing @SLOT.url is impossible."
+        ],
+        "grammar" : [
+            {
+                "text" : "metric",
+                "condition" : "contains"
+            },
+            {
+                "text" : "analyze metric",
+                "condition" : "contains"
+            }
+        ],
+        "field" : [
+            {
+                "name" : "url",
+                "type" : "text",
+                "required": true,
+                "directive" : [
+                    "What url do you want to analyze",
+                    "What is the url you want to analyze"
+                ]
+            }
+        ]
+    },
+    "RESEARCH" : {
+        "action" : "GET",
+        "score": 1,
+        "response" : [
+            "Researching @SLOT.channel, getting information",
+            "@SLOT.channel is being searched, please stand by"
+        ],
+        "failedResponse" : [
+            "Unable to search @SLOT.channel",
+            "Research on @SLOT.channel is impossible."
+        ],
+        "grammar" : [
+            {
+                "text" : "research",
+                "condition" : "contains"
+            },
+            {
+                "text" : "research channel",
+                "condition" : "contains"
+            }
+        ],
+        "field" : [
+            {
+                "name" : "partnumber",
+                "type" : "text",
+                "required": true,
+                "directive" : [
+                    "What part number do you want to work in?",
+                    "Which part number shall we research?"
+                ]
+            },
+			{
+                "name" : "format",
+                "type" : "confirm",
+                "options": [{"name": "view","id": "view"},
+                            {"name": "download","id": "download"}
+                           ],
+                "required": true,
+                "directive" : [
+                    "View or Download the research",
+                    "Do you want to view or download a file for the research"
+                ]
+            }
+        ]
+    },
+    "PARTSEARCH" : {
+        "action" : "GET",
+        "score": 1,
+        "response" : [
+            "Searching @SLOT.part, getting information",
+            "@SLOT.part is being searched, please stand by"
+        ],
+        "failedResponse" : [
+            "Unable to search @SLOT.part",
+            "Research on @SLOT.part is impossible."
+        ],
+        "grammar" : [
+            {
+                "text" : "part",
+                "condition" : "contains"
+            }
+        ],
+        "field" : [
+            {
+                "name" : "part",
+                "type" : "text",
+                "required": true,
+                "directive" : [
+                    "What part do you want to open?",
+                    "Which part shall we search?"
+                ]
+            }
+        ]
+    }
+}
