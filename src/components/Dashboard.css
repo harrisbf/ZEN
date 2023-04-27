@@ -1,4 +1,9 @@
-.dashboard-container {
-  display: flex;
-  justify-content: center;
+.editor_label {
+  margin-top: 5rem;
+  margin-right: 100rem;
+}
+
+.grammar_label {
+  margin-top: 5rem;
+  margin-left: 25rem;
 }

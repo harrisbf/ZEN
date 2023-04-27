@@ -1,31 +1,22 @@
 import React, {useState} from 'react'
-import schema from './Schema'
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
+import './Dashboard.css';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import InputLabel from '@mui/material/InputLabel'
-import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useAuth0 } from "@auth0/auth0-react";
 import zen_logo from '../assets/Zen.png';
-import { DataGrid } from '@mui/x-data-grid';
-import grammar from './testjson.json'
+import grammar from './grammar.json';
+import ReactJson from 'react-json-view';
+import JsonEditor from 'react-json-editor-ui'
 
 export default function Dashboard() {
-  //const [columns, setColumns] =  useState([]);
+  const [isJson, setIsJson] =  useState(grammar);
   const theme = createTheme();
   let dataList = [];
   //field: 'id', headerName: 'ID', width: 70 
   
-  const getParentFields = (json, path = '', parentFields = []) => {
+  /*const getParentFields = (json, path = '', parentFields = []) => {
     if (typeof json !== 'object' || !json) {
       // If the value is not an object, we have reached a leaf node.
       // Add the parent fields to the result array and return.
@@ -40,11 +31,11 @@ export default function Dashboard() {
     }
   
     return parentFields;
-  }
+  }*/
 
   //const parentFields = getParentFields(grammar);
   //console.log(parentFields);
-  const getAllFields = (json) => {
+  /*const getAllFields = (json) => {
     let fields = Object.keys(json);
     for (let field of fields) {
       if (typeof json[field] === "object") {
@@ -54,48 +45,56 @@ export default function Dashboard() {
     return fields;
   }
   dataList = getAllFields(grammar);
-
-  console.log("BFH",dataList);
   
-  const fields = getParentFields(grammar);
-  //console.log(fields);
+  const fields = getParentFields(grammar);*/
 
   const columns = [
     { field: dataList[0], headerName: dataList[0], width: 70 },
   ];
-  
+  //  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
   const rows = [
     { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+    { id: dataList[0] },
   ];
   return (
     <>
-      <div className=''>
-        <label className=''>Editor</label>
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={8} round={true}>
-          <Box
-            sx={{
-              my: 2,
-              p: 5,
-            }}
-          >
-            <label>Object</label>
-            <DataGrid
-              rows={rows}
-              columns={columns}
-              paginationModel={{ page: 0, pageSize: 5 }}
-              checkboxSelection
-            />
-          </Box>
-        </Grid>
+      <div style={{display: "flex", justifyContent: "space-between"}}>
+        <div className="editor_label">Editor</div>
+        <div className="grammar_label">Grammar</div>
       </div>
+      <Box sx={{ width: '100%' }}>
+        <Grid container p={10} sx={{display: 'flex', justifyContent: 'space-around'}}>
+          <Grid item xs={5}  component={Paper} elevation={2} round={true} sx={{height: "100vh", overflowY: "scroll"}}>
+            <Box
+              sx={{
+                p: 8,
+              }}
+            >
+              <JsonEditor
+                data={grammar}
+                onChange={data => {setIsJson(data)}}
+                optionsMap={{
+                  color: [
+                    { value: 'red', label: 'Red' },
+                    { value: 'blue', label: 'Blue' },
+                  ],
+                }}
+                />
+            </Box>
+          </Grid>
+          <Grid item xs={5} component={Paper} elevation={2} round={true} sx={{height: "100vh", overflowY: "scroll"}}>
+            <Box  
+              sx={{
+                p: 8,
+                lineHeight: "50px",
+                fontSize: "16px",
+              }}
+            >
+              <ReactJson src={isJson} enableClipboard={false} name={"Grammar"} />
+            </Box>
+          </Grid>
+        </Grid>
+      </Box>
     </>
   )
 }
