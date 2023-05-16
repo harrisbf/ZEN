@@ -7,7 +7,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useAuth0 } from "@auth0/auth0-react";
 import zen_logo from '../assets/Zen.png';
 import grammar from './grammar.json';
-import ReactJson from 'react-json-view';
 import JsonEditor from 'react-json-editor-ui'
 
 export default function Dashboard() {

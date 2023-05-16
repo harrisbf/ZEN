@@ -1,21 +1,36 @@
-import React, { Component, useState } from 'react'
-import JsonEditor from 'react-json-editor-ui'
-import 'react-json-editor-ui/dist/react-json-editor-ui.cjs.development.css'
+import React, { useState } from 'react';
+import { ReactDOM } from 'react-dom';
+import {ObjectEditor, ArrayEditor} from 'object-editor-react';
+import { SchemaTypes } from 'object-editor-react';
+import jsonData from './testjson.json';
 
 
-export default class Dashboard2 extends Component {
-  render() {
-    const data = [{ foo: "bar" }, { foo: "baz" }];
+const Dashboard2 = () => {
+  const [data, setData] = useState(jsonData);
+  const handleSave = (newData) => {
+    setData(newData);
+  };
+
+  const schema = {
+    foo: SchemaTypes.string({ required: true }),
+    
+    bar: {
+        baz: SchemaTypes.arrayOf({
+            nested: SchemaTypes.string(),
+        }),
+    },
+}
+
+  const returnEditor = () => {
     return (
-      <>
-          <ArrayEditor
-            className={"edit-box"}
-            type={schema}
-            object={data}
-            onUpdateElement={(el, index) => {}}
-            onAddElement={(newElement) => {}}
-          />
-      </>
+      <h1>Test</h1>
     )
   }
-}
+
+  return (
+    <div>
+      {() => returnEditor()}
+    </div>
+  );
+};
+export default Dashboard2

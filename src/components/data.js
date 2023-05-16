@@ -1,0 +1,32 @@
+const testJson = [
+    {
+        "SYSTEMNAME" : {
+            "action" : "PUT",
+            "score": 1,
+            "response" : [
+                "Hello @ALIAS I am @SYSTEMNAME",
+                "Hello @ALIAS @SYSTEMNAME is my name"
+            ],
+            "grammar" : [
+                {
+                    "text" : "who is this",
+                    "condition" : "contains"
+                },
+                {
+                    "text" : "who are you",
+                    "condition" : "contains"
+                },
+                {
+                    "text" : "who there",
+                    "condition" : "contains"
+                },
+                {
+                    "text" : "hello there",
+                    "condition" : "contains"
+                }
+            ]
+        }
+    }
+]
+
+export default testJson;
